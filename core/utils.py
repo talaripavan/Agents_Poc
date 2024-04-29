@@ -1,3 +1,5 @@
+""" Main function for loading our data  """
+
 from llama_index.core import SimpleDirectoryReader , Document
 from typing import Optional , List
 from dotenv import load_dotenv

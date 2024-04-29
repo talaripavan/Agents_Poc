@@ -1,4 +1,5 @@
-# from core.utils import load_data
+""" This File create a Json cache.json and store the Filename or Directory we declare to store. """
+
 from core.utils import load_data
 from pydantic import BaseModel , Field
 from typing import Optional
