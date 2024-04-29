@@ -17,11 +17,11 @@ class RAGAgentBuilder(BaseRAGAgentBuilder):
         cache: Optional[ParamCache] = None,
         ) -> None:
         
-        self.cache = cache or ParamCache()
+        self._cache = cache or ParamCache()
         
     @property
     def cache(self) -> ParamCache:
-        return self.cache
+        return self._cache
     
     def load_data(
         self,
@@ -36,4 +36,5 @@ class RAGAgentBuilder(BaseRAGAgentBuilder):
         self.cache.file_names = file_names
         self.cache.directory = directory
         
-        return "Data Loaded succesfully"
+        #return "Data Loaded succesfully"
+        return docs
