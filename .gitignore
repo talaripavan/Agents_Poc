@@ -1,6 +1,6 @@
 env
 .env
 .streamlit
-__pycache__
 file_name.py
 test_home.py
+__pycache__

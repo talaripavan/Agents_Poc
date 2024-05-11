@@ -1,5 +1,3 @@
 # RAG_Agent
 
-### Loading Completed 
-### TODO :- 
-### Connecting to Milvus 
+### Working with Routing Query Engine.
