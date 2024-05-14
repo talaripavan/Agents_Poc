@@ -10,7 +10,7 @@ def load_data(filepath):
   return docs
 
 # It stores the files into our current directory. 
-uploaded_file = st.file_uploader(" Upload a document ",type=["pdf", "txt", "docx"])
+uploaded_file = st.file_uploader(" Upload a document ",type=["pdf", "txt", "docx","csv","xlsx"])
 if uploaded_file is not None:
     file_path = uploaded_file.name
     st.write(file_path)

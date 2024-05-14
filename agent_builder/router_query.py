@@ -15,19 +15,22 @@ nodes = splitter.get_nodes_from_documents(documents)
 Settings.llm = OpenAI(model="gpt-3.5-turbo")
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-ada-002")
 
+"""
+Steps:-
+1. Defing the Index's
+2. Defing the Query Engines
+3. Defing the Query Engine Tools
+"""
 
-# Defing the Index's
 summary_index = SummaryIndex(nodes)
 vector_index = VectorStoreIndex(nodes)
 
-# Defing the Query Engines
 summary_query_engine = summary_index.as_query_engine(
     response_mode = "tree_summarize",
     use_async = True,
 )
 vector_query_engine = vector_index.as_query_engine()
 
-# Defing the Query Engine Tools
 summary_tool = QueryEngineTool.from_defaults(
     query_engine=summary_query_engine,
     description=(" Useful for summarization questions related to your document."),
@@ -39,7 +42,7 @@ vector_tool = QueryEngineTool.from_defaults(
 
 # Defing Router Query Engine.
 from llama_index.core.query_engine.router_query_engine import RouterQueryEngine
-from llama_index.core.selectors import LLMSingleSelector,LLMMultiSelector
+from llama_index.core.selectors import LLMSingleSelector
 
 query_engine = RouterQueryEngine(
     selector=LLMSingleSelector.from_defaults(),
