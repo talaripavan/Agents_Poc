@@ -6,13 +6,19 @@ from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
+
+
 from dotenv import load_dotenv
 load_dotenv()
-path = "MetaGPT.pdf"
-documents = SimpleDirectoryReader(input_files=[path]).load_data()
+
+
+path = ["MetaGPT.pdf","paul-graham-ideas.pdf"]
+documents = SimpleDirectoryReader(input_files=path).load_data()
 splitter = SentenceSplitter(chunk_size=1024)
 nodes = splitter.get_nodes_from_documents(documents)
-llm = OpenAI(model="gpt-3.5-turbo")
+#llm = OpenAI(model="gpt-3.5-turbo")
+llm = OpenAI(model="gpt-4o")
+
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-ada-002")
 
 summary_index = SummaryIndex(nodes)
@@ -43,30 +49,12 @@ agent_worker = FunctionCallingAgentWorker.from_tools(
     verbose=True
     )
 agent = AgentRunner(agent_worker)
-
-#response = agent.query(" Tell me about the agent roles in MetaGPT ")
-#print(response)
-#print(response.source_nodes[0].get_content(metadata_mode="all"))
-
-""" Working with AgentWorker and AgentRunner. """
-
-
-""" Creating a Task """
-task = agent.create_task(
+response = agent.query(
     "Tell me about the agent roles in MetaGPT, "
     "and then how they communicate with each other."
+    " Summarize the Paul's Journey. "
 )
-
-""" Running the Task """
-step_output = agent.run_step(task.task_id)
-
-completed_steps = agent.get_completed_steps(task.task_id)
-#print(f"Num completed for task {task.task_id}: {len(completed_steps)}")
-#print(completed_steps[0].output.sources[0].raw_output)
-
-
-upcoming_steps = agent.get_upcoming_steps(task.task_id)
-#print(f"Num upcoming steps for task {task.task_id}: {len(upcoming_steps)}")
-#upcoming_steps[0]
-
+""" Limitations """
+# Token Limit , we can not exceed the limit upto 60000 .
+print(str(response))
 

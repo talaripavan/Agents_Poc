@@ -9,6 +9,7 @@ def load_data(filepath):
     docs = reader.load_data()
   return docs
 
+
 # It stores the files into our current directory. 
 uploaded_file = st.file_uploader(" Upload a document ",type=["pdf", "txt", "docx","csv","xlsx"])
 if uploaded_file is not None:
