@@ -21,6 +21,8 @@ def load_data(filepath):
     nodes = spiltter.get_nodes_from_documents(docs)    
     llm = OpenAI(model="gpt-3.5-turbo")
     Settings.embed_model = OpenAIEmbedding(model="text-embedding-ada-002")
+    
+    
     summary_index = SummaryIndex(nodes)
     vector_index = VectorStoreIndex(nodes)
     summary_query_engine = summary_index.as_query_engine(
