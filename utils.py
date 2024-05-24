@@ -31,7 +31,7 @@ def load_data(files):
     docs = reader.load_data()
     spilter = SentenceSplitter(chunk_size=1024)
     chunk = spilter.get_nodes_from_documents(documents=docs)
-    vector_store = MilvusVectorStore(collection_name="llamacollection",dim=1536,overwrite=True,uri="http://192.168.29.44:19530")
+    vector_store = MilvusVectorStore(collection_name="llamacollection",dim=1536,overwrite=True,uri="< URL >")
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
     vector_index = VectorStoreIndex(nodes=chunk,storage_context=storage_context)
     return vector_index
@@ -48,7 +48,6 @@ def load_data_agent():
         tools=[data_tool,create_agent_tool],
         llm=llm,
         verbose=True,
-        # Change the system prompt to just load the documents and Create an Agent.
         system_prompt=""" 
         You are helping to construct an agent given a user-specified task. 
         You should generally use the tools in this rough order to build the agent."
